@@ -5,7 +5,7 @@ class MovieDAO:
     def __init__(self, session):
         self.session = session
 
-    def get(self, mid, **kwargs):
+    def get(self, mid: int, **kwargs) -> list[dict]:
         """Метод, который выводит все фильмы или фильмы по режиссёрам, жанрам и годам или фильм по id"""
         query = self.session.query(Movie)
 
@@ -17,7 +17,7 @@ class MovieDAO:
 
         return query.all()
 
-    def create(self, data):
+    def create(self, data: dict) -> dict:
         """Метод, который добавляет новый фильм"""
         movie = Movie(**data)
 
@@ -26,7 +26,7 @@ class MovieDAO:
 
         return movie
 
-    def update(self, movie):
+    def update(self, movie) -> dict:
         """Метод, который обновляет полностью или частично данные фильма"""
 
         self.session.add(movie)
@@ -34,7 +34,7 @@ class MovieDAO:
 
         return movie
 
-    def delete(self, mid):
+    def delete(self, mid: int) -> None:
         """Метод, который удаляет данные фильма"""
         movie = self.get(mid)
         if not movie:

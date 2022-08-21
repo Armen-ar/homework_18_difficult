@@ -5,7 +5,7 @@ class GenreDAO:
     def __init__(self, session):
         self.session = session
 
-    def get(self, gid=None):
+    def get(self, gid=None) -> list[dict]:
         """Метод, который выводит все жанры или жанр по id"""
         query = self.session.query(Genre)
         if gid:

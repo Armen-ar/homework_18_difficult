@@ -1,3 +1,5 @@
+from typing import Tuple, Optional
+
 from app.dao.movie import MovieDAO
 
 
@@ -10,12 +12,12 @@ class MovieService:
 
         return self.dao.get(mid, **kwargs)
 
-    def create(self, data):
+    def create(self, data: dict) -> dict:
         """Метод, который добавляет данные о новом фильме"""
 
         return self.dao.create(data)
 
-    def update(self, mid, data):
+    def update(self, mid: int, data: dict) -> Tuple:
         """Метод, который обновляет полностью данные фильма"""
         movie = self.get_movies(mid)
 
@@ -28,9 +30,9 @@ class MovieService:
         movie.director_id = data['director_id']
         self.dao.update(movie)
 
-        return movie, 204
+        return movie, 200
 
-    def update_partial(self, mid, data):
+    def update_partial(self, mid: int, data: dict) -> Tuple:
         """Метод, который обновляет частично данные фильма"""
         movie = self.get_movies(mid)
 
@@ -52,6 +54,6 @@ class MovieService:
 
         return movie, 204
 
-    def delete(self, mid):
+    def delete(self, mid: int):
         """Метод, который удаляет данные фильма"""
         self.dao.delete(mid)
